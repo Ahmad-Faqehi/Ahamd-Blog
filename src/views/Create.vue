@@ -1,60 +1,108 @@
 <template>
-  <div class="create">
-    <form @submit.prevent="handleSubmit">
-      <label>Title:</label>
-      <input v-model="title" type="text" required>
-      <label>Content:</label>
-      <textarea v-model="body" required></textarea>
-      <label>Tags (hit enter to add a tag):</label>
-      <input 
-        @keydown.enter.prevent="handleKeydown" 
-        v-model="tag" 
-        type="text"
-      >
-      <div v-for="tag in tags" :key="tag" class="pill">
-        #{{ tag }}
-      </div>
-      <button>Add Post</button>
-    </form>
-  </div>
+<main>
+    <div class="container">
+        <div class="row">
+
+            <!-- Details informations -->
+            <div class="col-xs-12">
+                <section class="white-box">
+                    <div class="get-in-touch center">
+                        <h2>Create Post</h2>
+                        <form @submit.prevent="handleSubmit">
+                            <label >Title</label>
+                            <input class="col-xs-12 form-control" type="text" placeholder="Title of post..." name="name" v-model="title">
+                            <br>
+                          <label >Body</label>
+                        <editor v-model="body" api-key="4ivcuypa0mzrpzqdnce9fe9g7c69n5sgkimi5hf3lk1qyjku" :init="{
+                                height: 500,
+                                menubar: false,
+                                plugins: ['advlist autolink lists link image charmap print preview anchor','searchreplace visualblocks code fullscreen','insertdatetime media table paste code help wordcount'],
+                                toolbar:'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
+                                }"/>
+                           <br>
+                           <label >category</label>
+                            <select class="col-xs-12 form-control"  v-model="category">
+                              <option value="volvo" >Volvo</option>
+                              <option value="saab">Saab</option>
+                              <option value="mercedes">Mercedes</option>
+                              <option value="audi">Audi</option>
+                            </select>                            
+                            <br>
+                            <label >Image</label>
+                            <input class="col-xs-12 form-control" type="file" accept="image/*" @change="uploadImage" id="file-input" >
+                            <br>
+                            <button type="submit" class="btn"><i class="pe-7s-paper-plane"></i> Send</button>
+                        </form>
+
+
+
+
+                    </div>
+
+                </section>
+            </div>
+
+        </div>
+    </div>
+</main>
 </template>
 
 <script>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { projectFirestore } from '../firebase/config'
+import Editor from '@tinymce/tinymce-vue'
 export default {
+   components: {
+     'editor': Editor
+   },
   setup() {
     const title = ref('')
     const body = ref('')
-    const tags = ref([])
-    const tag = ref('')
+    const category = ref('')
+    const image = ref('')
+    const base64img = ref('')
     const router = useRouter()
 
-    const handleKeydown = () => {
-      if (!tags.value.includes(tag.value)) {
-        tag.value = tag.value.replace(/\s/g,'') // remove all whitespace
-        tags.value.push(tag.value)
-      }
-      tag.value = ''
-    }
+$("nav").removeClass("mobile-nav-open");
+$("body").removeClass("noscroll");
+$("#menu-animate-icon").removeClass("open");
+
+
+
     const handleSubmit = async () => {
       const post = {
         title: title.value,
         body: body.value,
-        tags: tags.value
+        category: category.value,
+        image: image.value
       }
-
+  
      const res = await projectFirestore.collection('posts').add(post)
       router.push({ name: 'Home' })
-      
+
     }
-    return { body, title, tags, tag, handleKeydown, handleSubmit }
+      const uploadImage = async (e) => {
+        const ximage = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.readAsDataURL(ximage);
+        reader.onload = e => {
+        image.value = e.target.result
+        console.log(image.value)
+        }
+
+
+      }
+    return { body, title, category, handleSubmit, uploadImage }
   },
 }
 </script>
 
-<style>
+<style scoped>
+select{
+  padding: inherit;
+}
   /* form {
     max-width: 480px;
     margin: 0 auto;

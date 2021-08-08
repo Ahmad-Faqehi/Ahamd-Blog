@@ -8,6 +8,7 @@ import '../public/css/social-icons.css'
 import '../public/css/owl.carousel.css'
 import '../public/css/owl.theme.css'
 import '../public/css/main.css'
+import '../public/css/placeholder-loading.min.css'
 
 
 

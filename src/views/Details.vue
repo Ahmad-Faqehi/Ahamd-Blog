@@ -1,9 +1,9 @@
 <template>
   <!-- <div v-if="error">{{ error }}</div> -->
    <!-- ARTICLE BLOG POST -->
-   <main>
+   <main v-if="post">
     <section  class="articles articles-blog-post">
-        <article v-if="post" class="articles-blog-post">
+        <article  class="articles-blog-post">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 col-xs-12">
@@ -12,15 +12,15 @@
                         <div class="articles-header">
                             <time datetime="2016-10-11">12 hours ago</time>
                             <span class="articles-header-tag-green">New</span>
-                            <span class="articles-header-category"><a href="#" class="green" title="">Graphic</a></span>
+                            <span class="articles-header-category"><a href="#" class="green" title=""> {{ post.category }}</a></span>
                         </div>
                         <div class="articles-content">
+                            <img :src="post.image" class="img-fluid" />
                             <h1 class="articles-content-blog-post-title">
                              {{ post.title }}
                               </h1>
-                             <p>
-                               {{post.body}}
-                               </p> 
+                              <p v-html="post.body"></p>
+                               
                         </div>
                     </div>
 
@@ -42,11 +42,12 @@
                 </div>
             </div>
         </article>
-  <div v-else>
-    <Spinner />
-  </div>
+
     </section>
    </main>
+     <div v-else>
+    <Spinner />
+  </div>
     <!-- end ARTICLE BLOG POST -->
 </template>
 
@@ -61,6 +62,10 @@ export default {
   props: ['id'],
   components: { Spinner },
   setup(props) {
+
+$("nav").removeClass("mobile-nav-open");
+$("body").removeClass("noscroll");
+$("#menu-animate-icon").removeClass("open");
 
     const router = useRouter()
     const route = useRoute()

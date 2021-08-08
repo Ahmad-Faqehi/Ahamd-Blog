@@ -56,7 +56,7 @@
                         </li>
                         <li><a href="about_me.html" title="About me">About me</a></li>
                         <li><a href="portfolio.html" title="My projects">My projects</a></li>
-                        <li><a href="contact.html" title="Contact me">Contact me</a></li>
+                        <li><router-link :to="{ name: 'Create'}">Create</router-link></li>
                     </ul>
                 </nav>
             </div>
@@ -92,7 +92,7 @@
                         </li>
                         <li><a href="about_me.html" title="About me">About me</a></li>
                         <li><a href="portfolio.html" title="My projects">My projects</a></li>
-                        <li><a href="contact.html" title="Contact me">Contact me</a></li>
+                        <li><router-link :to="{ name: 'Create'}">Create</router-link></li>
                     </ul>
             </div>
         </div>

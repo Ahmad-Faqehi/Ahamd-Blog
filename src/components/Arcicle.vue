@@ -8,13 +8,13 @@
                         <div class="articles-header">
                             <time datetime="2016-10-11">12 hours ago</time>
                             <span class="articles-header-tag">New</span>
-                            <span class="articles-header-category"><a href="#" title="">{{post.tags[0]}}</a></span>
+                            <span class="articles-header-category"><a href="#" title="">TEST</a></span>
                         </div>
                         <div class="articles-content">
                           
                             <!-- <h1><a href="blog_post.html" title="">{{ post.title }}</a></h1> -->
                             <h1><router-link :to="{ name: 'Details', params: { id: post.id }}">{{ post.title }}</router-link></h1>
-                            <p>{{ snippet }}</p>
+                            {{ snippet }}
                         </div>
                         <div class="articles-footer">
                             <ul>

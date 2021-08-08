@@ -5,31 +5,72 @@
     <Main :posts="posts" />
      </div>
     <div v-else>
-<ContentLoader viewBox="0 0 250 110" primaryColor="#e3e3e3" secondaryColor="#cccccc" class="p-2">
-  <rect x="0" y="0" rx="3" ry="3" width="250" height="10" />
-  <rect x="20" y="20" rx="3" ry="3" width="220" height="10" />
-  <rect x="20" y="40" rx="3" ry="3" width="170" height="10" />
-  <rect x="0" y="60" rx="3" ry="3" width="250" height="10" />
-  <rect x="20" y="80" rx="3" ry="3" width="200" height="10" />
-  <rect x="20" y="100" rx="3" ry="3" width="80" height="10" />
-</ContentLoader>
+        <div class="container">
 
-
+<div class="ph-item">
+    <div class="ph-col-12">
+        <div class="ph-picture"></div>
+        <div class="ph-row">
+            <div class="ph-col-6 big"></div>
+            <div class="ph-col-4 empty big"></div>
+            <div class="ph-col-2 big"></div>
+            <div class="ph-col-4"></div>
+            <div class="ph-col-8 empty"></div>
+            <div class="ph-col-6"></div>
+            <div class="ph-col-6 empty"></div>
+            <div class="ph-col-12"></div>
+        </div>
     </div>
+</div>
+<div class="ph-item">
+    <div class="ph-col-12">
+        <div class="ph-picture"></div>
+        <div class="ph-row">
+            <div class="ph-col-6 big"></div>
+            <div class="ph-col-4 empty big"></div>
+            <div class="ph-col-2 big"></div>
+            <div class="ph-col-4"></div>
+            <div class="ph-col-8 empty"></div>
+            <div class="ph-col-6"></div>
+            <div class="ph-col-6 empty"></div>
+            <div class="ph-col-12"></div>
+        </div>
+    </div>
+</div>
+<div class="ph-item">
+    <div class="ph-col-12">
+        <div class="ph-picture"></div>
+        <div class="ph-row">
+            <div class="ph-col-6 big"></div>
+            <div class="ph-col-4 empty big"></div>
+            <div class="ph-col-2 big"></div>
+            <div class="ph-col-4"></div>
+            <div class="ph-col-8 empty"></div>
+            <div class="ph-col-6"></div>
+            <div class="ph-col-6 empty"></div>
+            <div class="ph-col-12"></div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        </div>
+
 
 </template>
 
 <script>
 import { ref } from 'vue'
 import getPosts from '../composables/getPosts'
-import { ContentLoader } from 'vue-content-loader'
 // component imports
-
 import Main from '../components/Main.vue'
 export default {
   name: 'Home',
-  components: { Main, ContentLoader },
+  components: { Main },
   setup() { 
+$("nav").removeClass("mobile-nav-open");
+$("body").removeClass("noscroll");
+$("#menu-animate-icon").removeClass("open");
     const { posts, error, load } = getPosts()
     load()
     

@@ -18,11 +18,11 @@ const routes = [
     component: Details,
     props: true
   },
-  // {
-  //   path: '/create',
-  //   name: 'Create',
-  //   component: Create
-  // },
+  {
+    path: '/create',
+    name: 'Create',
+    component: Create
+  },
   // {
   //   path: '/tags/:tag',
   //   name: 'Tag',

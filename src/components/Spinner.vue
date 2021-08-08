@@ -10,8 +10,9 @@
   margin: 30px auto;
   border: 3px solid transparent;
   border-radius: 50%;
-  border-top-color: #ff8800;
+  border-top-color: #c5c5c5;
   animation: spin 1s ease infinite;
+  padding-top: 20px;
 }
 @keyframes spin {
   to { -webkit-transform: rotateZ(360deg);  }
