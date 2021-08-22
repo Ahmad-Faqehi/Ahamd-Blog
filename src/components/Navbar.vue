@@ -13,7 +13,7 @@
                         </router-link>
                     </div>
                     <div class="header-top-text">
-                        <p> Ahmad Blog </p>
+                       <router-link :to="{ name: 'Home'}"> <p>Ahmad Blog</p> </router-link>
                     </div>
                     <nav class="header-top-nav">
                         <ul>
