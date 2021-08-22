@@ -12,7 +12,7 @@
                         </div>
                         <div class="articles-content">
                         <h1><router-link :to="{ name: 'Details', params: { id: post.id }}">{{ post.title }}</router-link></h1>
-                            {{ snippet }}
+                            {{ removeTags(snippet) }}
                         </div>
                         <div class="articles-footer">
                            
@@ -30,7 +30,17 @@ props: ['post'],
     const snippet = computed(() => {
       return props.post.body.substring(0, 100) + '...'
     })
+    
     return { snippet }
+  }, methods:{
+    
+    removeTags(str) {
+      if ((str===null) || (str===''))
+      return false;
+      else
+      str = str.toString();
+      return str.replace( /(<([^>]+)>)/ig, '');
+   }
   }
 
 }

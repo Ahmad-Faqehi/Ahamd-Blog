@@ -72,10 +72,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
+                
                 <!-- Auto Copy Header Navigation -->
                                     <ul>
                         <li class="active">
-                            <!-- <a href="index.html" title="Start page">Start page</a> -->
                             <router-link :to="{ name: 'Home'}">Home</router-link>
                         </li>
                         <li class="dropdown">
