@@ -8,7 +8,9 @@
             <div class="col-lg-12">
                 <div class="header-top">
                     <div class="header-top-logo">
-                        <a href="index.html" title="Logo"><img src="https://i.imgur.com/YXOciuo.png" alt="Dblog Logo" data-rjs="2"></a>
+                        <router-link :to="{ name: 'Home'}">
+                            <img src="https://i.imgur.com/YXOciuo.png" alt="Dblog Logo" data-rjs="2">
+                        </router-link>
                     </div>
                     <div class="header-top-text">
                         <p> Ahmad Blog </p>
