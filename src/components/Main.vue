@@ -27,7 +27,7 @@
                             <li class="page-item page-item-more"><a class="page-link" href="#">...</a></li>
                             <li class="page-item"><a class="page-link" href="#">25</a></li>
                         </ul>
-                        <a title="" href="blog_post.html" class="btn-small-white pagination-next">Next</a>
+                        <a title="" href="#" class="btn-small-white pagination-next">Next</a>
                     </nav>
 
                 </section>

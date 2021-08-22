@@ -11,18 +11,12 @@
                             <span class="articles-header-category"><a href="#" title="">TEST</a></span>
                         </div>
                         <div class="articles-content">
-                          
-                            <!-- <h1><a href="blog_post.html" title="">{{ post.title }}</a></h1> -->
-                            <h1><router-link :to="{ name: 'Details', params: { id: post.id }}">{{ post.title }}</router-link></h1>
+                        <h1><router-link :to="{ name: 'Details', params: { id: post.id }}">{{ post.title }}</router-link></h1>
                             {{ snippet }}
                         </div>
                         <div class="articles-footer">
-                            <ul>
-                                <li><a href="#" title=""><i class="pe-7s-comment"></i> 7 Response</a></li>
-                                <li><a href="#" title=""><i class="pe-7s-like"></i> 1221</a></li>
-                            </ul>
-                            <a title="" class="btn" href="">Read more</a>
-
+                           
+                            <router-link :to="{ name: 'Details', params: { id: post.id }}" class="btn">Read more</router-link>
                         </div>
                     </article>
 </template>
