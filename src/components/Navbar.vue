@@ -50,9 +50,9 @@
                         <li v-if="!isLogin">
                             <router-link :to="{ name: 'Login'}">Login</router-link>
                         </li>
-                        <!-- <li><a href="about_me.html" title="About me">About me</a></li>
-                        <li><a href="portfolio.html" title="My projects">My projects</a></li> -->
                         <li v-if="isLogin" ><router-link :to="{ name: 'Create'}">Create Post</router-link></li>
+                         <li v-if="isLogin" ><a href="#" @click="logout">Logout</a></li>
+
                     </ul>
                 </nav>
             </div>
@@ -78,10 +78,9 @@
                         <li v-if="!isLogin">
                             <router-link :to="{ name: 'Login'}">Login</router-link>
                         </li>
-                        <!-- <li><a href="about_me.html" title="About me">About me</a></li>
-                        <li><a href="portfolio.html" title="My projects">My projects</a></li> -->
                         <li v-if="isLogin" ><router-link :to="{ name: 'Create'}">Create Post</router-link></li>
-                    </ul>
+                        <li v-if="isLogin" ><a href="#" @click="logout">Logout</a></li>                    
+                        </ul>
             </div>
         </div>
     </div>
@@ -108,6 +107,17 @@ export default {
 
 });
 return {isLogin}
+    },methods:{
+
+        logout(){
+
+            projectAuth.signOut().then(function() {
+            // Sign-out successful.
+            }, function(error) {
+            console.log(error)
+            });
+
+        }
     }
 }
 </script>
