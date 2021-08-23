@@ -16,7 +16,7 @@
                     <Arcicle :post="post" />
                     </div>
                     <!-- PAGINATION -->
-                    <nav aria-label="...">
+                    <!-- <nav aria-label="...">
                         <a title="" href="" class="btn-small-white pagination-back">Back</a>
                         <ul class="pagination">
                             <li class="page-item active">
@@ -28,7 +28,7 @@
                             <li class="page-item"><a class="page-link" href="#">25</a></li>
                         </ul>
                         <a title="" href="#" class="btn-small-white pagination-next">Next</a>
-                    </nav>
+                    </nav> -->
 
                 </section>
             </div>

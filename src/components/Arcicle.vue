@@ -3,7 +3,7 @@
                       <!-- IMAGE ARTICLE -->
                     <article  class="green-article">
                       <router-link :to="{ name: 'Details', params: { id: post.id }}">
-                        <img class="articles-preview-img" src="img/article-image.jpg" alt="{{ post.title }}"  data-rjs="2">
+                        <img class="articles-preview-img" :src="image" :alt="post.title"  data-rjs="2">
                         </router-link>
                         <div class="articles-header">
                             <time datetime="2016-10-11">12 hours ago</time>
@@ -22,16 +22,23 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 export default {
 props: ['post'],
   setup(props) {
+    const image = ref('')
     const snippet = computed(() => {
       return props.post.body.substring(0, 100) + '...'
     })
     
-    return { snippet }
+    if(props.post.image){
+      image.value = props.post.image
+    }else{
+      image.value = "img/placeholder.png"
+    }
+
+    return { snippet, image }
   }, methods:{
     
     removeTags(str) {
