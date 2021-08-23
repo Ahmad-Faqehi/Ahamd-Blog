@@ -9,12 +9,11 @@
             <div class="col-xs-12">
                 <div class="copyright">
                     <ul>
-                        <li><a href="" title="Twitter"><i class="icon-social_twitter_circle"></i></a></li>
-                        <li><a href="" title="Github"><i class="icon-social_github_circle"></i></a></li>
-                        <li><a href="" title="LinkedIn"><i class="icon-social_linkedin_circle"></i></a></li>
+                        <li><a href="https://twitter.com/A_F775" title="Twitter"><i class="icon-social_twitter_circle"></i></a></li>
+                        <li><a href="https://github.com/Ahmad-Faqehi" title="Github"><i class="icon-social_github_circle"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/ahmad-faqehi/" title="LinkedIn"><i class="icon-social_linkedin_circle"></i></a></li>
                     </ul>
-                    <p class="font-primary">&copy; Theme by <a href="#" title="" class="black">Komon.ski</a> . All
-                        Rights Reserved.</p>
+                    <p class="font-primary">&copy; All Rights Reserved.</p>
                 </div>
             </div>
         </div>

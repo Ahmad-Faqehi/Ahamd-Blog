@@ -10,9 +10,10 @@
 
                         <!-- TEXT ARTICLE -->
                         <div class="articles-header">
-                            <time datetime="2016-10-11">12 hours ago</time>
-                            <span class="articles-header-tag-green">New</span>
-                            <span class="articles-header-category"><a href="#" class="green" title=""> {{ post.category }}</a></span>
+                            <time datetime="">{{ timestepToRealTime(post.createAt) }}</time>
+                            <span v-if="isNew(post.createAt)" class="articles-header-tag-green">New</span>
+
+                            <span class="articles-header-category"><a href="#" :class="nameToColor(post.category)" title=""> {{ post.category }}</a></span>
                         </div>
                         <div class="articles-content">
                             <img :src="post.image" class="img-fluid" />
@@ -56,6 +57,8 @@ import getPost from '@/composables/getPost'
 import { useRouter, useRoute } from 'vue-router'
 import Spinner from '../components/Spinner.vue'
 import { projectFirestore } from '../firebase/config'
+import { format } from 'timeago.js';
+
 
 
 export default {
@@ -78,7 +81,38 @@ $("#menu-animate-icon").removeClass("open");
        router.push({ name: 'Home' })
     }
     return { error, post, handleclik }
-  },
+  }, methods:{
+
+      nameToColor(str){
+
+            if(str == "Tech"){
+                return "red"
+            }else if(str == "Life"){
+                return "green"
+            }else if(str == "Coffee"){
+                return "yellow"
+            }else if(str == "Sport"){
+                return "blue"
+            }else{
+                return "un-article"
+            }
+        },
+        timestepToRealTime(stemp){
+          
+         return format(stemp['seconds']*1000)
+
+        }, isNew(stemp){
+          const timeFutcher = stemp['seconds'] + (24*60*60)
+          var date = new Date();
+          const timeNow = Math.floor(date.getTime()/1000)
+
+          if(timeFutcher > timeNow){
+            return true
+          }
+            return false
+         
+        }
+  }
 }
 </script>
 

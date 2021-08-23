@@ -7,7 +7,7 @@
                         </router-link>
                         <div class="articles-header">
                             <time datetime="2016-10-11">{{ timestepToRealTime(post.createAt) }}</time>
-                            <span class="articles-header-tag">New</span>
+                            <span v-if="isNew(post.createAt)" class="articles-header-tag">New</span>
                             <span class="articles-header-category"><a href="#" title="">{{ post.category }}</a></span>
                         </div>
                         <div class="articles-content">
@@ -68,6 +68,17 @@ props: ['post'],
         timestepToRealTime(stemp){
 
          return format(stemp['seconds']*1000)
+        },
+        
+        isNew(stemp){
+          const timeFutcher = stemp['seconds'] + (24*60*60)
+          var date = new Date();
+          const timeNow = Math.floor(date.getTime()/1000)
+          if(timeFutcher > timeNow){
+            return true
+          }
+            return false
+         
         }
 
    

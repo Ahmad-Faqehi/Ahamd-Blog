@@ -10,7 +10,7 @@
                         <h2>Create Post</h2>
                         <form @submit.prevent="handleSubmit">
                             <label >Title</label>
-                            <input class="col-xs-12 form-control" type="text" placeholder="Title of post..." name="name" v-model="title">
+                            <input class="col-xs-12 form-control" type="text" placeholder="Title of post..." name="name" v-model="title" required>
                             <br>
                           <label >Body</label>
                         <editor v-model="body" api-key="4ivcuypa0mzrpzqdnce9fe9g7c69n5sgkimi5hf3lk1qyjku" :init="{
@@ -21,14 +21,18 @@
                                 }"/>
                            <br>
                            <label >category </label>
-                            <select class="col-xs-12 form-control"  v-model="cat">
+                            <select class="col-xs-12 form-control"  v-model="cat" required>
                               <option v-for="cat in category" :key="cat.id" :value="cat.name" >{{cat.name}}</option>
                             </select>                            
                             <br>
                             <label >Image</label>
                             <input class="col-xs-12 form-control" type="file" accept="image/*" @change="uploadImage" id="file-input" >
                             <br>
-                            <button type="submit" class="btn"><i class="pe-7s-paper-plane"></i> Send</button>
+                            <button type="submit" id="btnsub" class="btn"><i class="pe-7s-paper-plane"></i> Create Post </button>
+                            <div v-if="showSpiner" >
+                               <Spinner />
+                            </div>
+
                         </form>
 
 
@@ -50,9 +54,12 @@ import { useRouter } from 'vue-router'
 import { projectFirestore, timestamp } from '../firebase/config'
 import Editor from '@tinymce/tinymce-vue'
 import getCategory from '../composables/getCategory'
+import Spinner from '../components/Spinner.vue'
+
 export default {
    components: {
-     'editor': Editor
+     'editor': Editor,
+     Spinner
    },
   setup() {
     const title = ref('')
@@ -61,6 +68,7 @@ export default {
     const image = ref('')
     const base64img = ref('')
     const router = useRouter()
+    const showSpiner = ref(false)
 
 $("nav").removeClass("mobile-nav-open");
 $("body").removeClass("noscroll");
@@ -71,6 +79,9 @@ load()
 
 
     const handleSubmit = async () => {
+      showSpiner.value = true
+      $('#btnsub').prop('disabled', true);
+
       const post = {
         title: title.value,
         body: body.value,
@@ -95,7 +106,7 @@ load()
 
 
       }
-    return { body, title, cat, handleSubmit, uploadImage, category }
+    return { body, title, cat, handleSubmit, uploadImage, category, showSpiner }
   },
 }
 </script>
@@ -103,6 +114,11 @@ load()
 <style scoped>
 select{
   padding: inherit;
+}
+#btnsub{
+      color: #fff;
+    background-color: #5bc0de;
+    border-color: #5bc0de;
 }
   /* form {
     max-width: 480px;
