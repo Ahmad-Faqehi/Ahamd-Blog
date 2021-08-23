@@ -28,7 +28,9 @@
                             <label >Image</label>
                             <input class="col-xs-12 form-control" type="file" accept="image/*" @change="uploadImage" id="file-input" >
                             <br>
-                            <button type="submit" id="btnsub" class="btn"><i class="pe-7s-paper-plane"></i> Create Post </button>
+                            <div class="center">
+                            <button type="submit" id="btnsub" class="btn"> Create Post </button>
+                            </div>
                             <div v-if="showSpiner" >
                                <Spinner />
                             </div>
@@ -119,6 +121,9 @@ select{
       color: #fff;
     background-color: #5bc0de;
     border-color: #5bc0de;
+}
+.center{
+  text-align: center;
 }
   /* form {
     max-width: 480px;
