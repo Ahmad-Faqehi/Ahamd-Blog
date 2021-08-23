@@ -55,6 +55,10 @@ export default {
 
     const { error, login  } = useLogin()
 
+$("nav").removeClass("mobile-nav-open");
+$("body").removeClass("noscroll");
+$("#menu-animate-icon").removeClass("open");
+
     const handleSubmit = async () => {
       await login(email.value, password.value)
       if (!error.value) {

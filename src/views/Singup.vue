@@ -58,6 +58,10 @@ export default {
 
     const { error, signup } = useSignup()
 
+$("nav").removeClass("mobile-nav-open");
+$("body").removeClass("noscroll");
+$("#menu-animate-icon").removeClass("open");
+
     const handleSubmit = async () => {
      await signup(email.value, password.value, name.value)
       if (!error.value) {
