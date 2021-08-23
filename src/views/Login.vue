@@ -1,19 +1,41 @@
 <template>
-  <div class="create">
-      <h3>Login</h3>
-      <div v-if="success" class="alert">
-        Login done successed
-      </div>
-    <form @submit.prevent="handleSubmit">
-    
-      <label>Email:</label>
-      <input v-model="email" type="email" required>
-      <label>Password:</label>
-      <input v-model="password" type="text" required>
-      <div class="error">{{ error }}</div>
-      <button>Login</button>
-    </form>
-  </div>
+<main>
+    <div class="container">
+        <div class="row">
+
+            <!-- Details informations -->
+            <div class="col-xs-12">
+                <section class="white-box">
+              <div v-if="error" class="alert alert-danger" role="alert">
+                 {{error}}
+              </div>
+                    <div class="get-in-touch center">
+                        <h2>Login Page</h2>
+                        <form @submit.prevent="handleSubmit">
+                          <br>
+
+                            <label>Email</label>
+                            <input class="col-xs-12 form-control" type="email" placeholder="Your Email" name="email" v-model="email">
+                            <br>
+
+                            <label>Password</label>
+                            <input class="col-xs-12 form-control" type="password" placeholder="Your Password" name="password" v-model="password">
+                            <br>
+                          
+                            <button type="submit" class="btn"><i class="pe-7s-paper-plane"></i> Login</button>
+                        </form>
+
+
+
+
+                    </div>
+
+                </section>  
+            </div>
+
+        </div>
+    </div>
+</main>
 </template>
 
 <script>
@@ -47,6 +69,7 @@ export default {
       if (!error.value) {
         context.emit('login')
         success.value = true
+        router.push({ name: 'Home' })
       }
     }
 

@@ -1,20 +1,45 @@
 <template>
-  <div class="create">
-      <h3>Sing Up</h3>
-      <div v-if="success" class="alert">
-        signup done successed
-      </div>
-    <form @submit.prevent="handleSubmit">
-      <label>First Name:</label>
-      <input v-model="name" type="text" required>
-      <label>Email:</label>
-      <input v-model="email" type="email" required>
-      <label>Password:</label>
-      <input v-model="password" type="text" required>
-      <div class="error">{{ error }}</div>
-      <button>Create Account</button>
-    </form>
-  </div>
+<main>
+    <div class="container">
+        <div class="row">
+
+            <!-- Details informations -->
+            <div class="col-xs-12">
+                <section class="white-box">
+              <div v-if="error" class="alert alert-danger" role="alert">
+                 {{error}}
+              </div>
+                    <div class="get-in-touch center">
+                        <h2>Singup Page</h2>
+                        <form @submit.prevent="handleSubmit">
+                          <br>
+
+                            <label>First Name</label>
+                            <input class="col-xs-12 form-control" type="text" placeholder="Your First Name" name="name" v-model="name">
+                            <br>
+
+                            <label>Email</label>
+                            <input class="col-xs-12 form-control" type="email" placeholder="Your Email" name="email" v-model="email">
+                            <br>
+
+                            <label>Password</label>
+                            <input class="col-xs-12 form-control" type="password" placeholder="Your Password" name="password" v-model="password">
+                            <br>
+                          
+                            <button type="submit" class="btn"><i class="pe-7s-paper-plane"></i> Create Account </button>
+                        </form>
+
+
+
+
+                    </div>
+
+                </section>  
+            </div>
+
+        </div>
+    </div>
+</main>
 </template>
 
 <script>
@@ -38,9 +63,11 @@ export default {
       if (!error.value) {
         context.emit('signup')
         success.value = true
+        router.push({ name: 'Home' })
       }      
 
-    //   router.push({ name: 'Home' })
+    
+    
       
     }
     return { password, email, name, handleSubmit, error, success }
