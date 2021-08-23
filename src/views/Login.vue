@@ -45,15 +45,6 @@ import useLogin from '../composables/useLogin'
 import { projectAuth } from '../firebase/config';
 
 
-projectAuth.onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in.
-    console.log("1")
-  } else {
-     console.log("0")
-  }
-});
-
 export default {
   setup(props, context) {
     const email = ref('')
