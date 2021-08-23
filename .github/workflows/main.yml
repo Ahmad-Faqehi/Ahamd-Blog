@@ -20,6 +20,12 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Get Last Tag for Image
+        run: |
+          tag=$(wget -q https://registry.hub.docker.com/v1/repositories/ahmad75/blog-vue/tags -O -  | sed -e 's/[][]//g' -e 's/"//g' -e 's/ //g' | tr '}' '\n'  | awk -F: '{print $3}' | tail -1)
+          tag=$((tag+1))
+        shell: bash
+        
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
@@ -40,7 +46,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/blog-vue:1
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/blog-vue:${{tag}}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
         
