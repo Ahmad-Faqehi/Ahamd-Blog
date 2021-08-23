@@ -13,7 +13,7 @@
                         </router-link>
                     </div>
                     <div class="header-top-text">
-                       <router-link :to="{ name: 'Home'}"> <p>Abduallah Blog</p> </router-link>
+                       <router-link :to="{ name: 'Home'}"> <p>Ahmad Blog</p> </router-link>
                     </div>
                     <nav class="header-top-nav">
                         <ul>
@@ -41,24 +41,18 @@
             <div class="col-lg-12">
                 <nav class="header-nav">
                     <ul>
+                        <li>
                             <router-link :to="{ name: 'Home'}">Home</router-link>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" title="Blog articles">Blog articles</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-elipse-blue"><a href="blog_list.html" title="Blog CSS articles">CSS</a>
-                                </li>
-                                <li class="nav-elipse-red"><a href="blog_list.html" title="Blog HTML articles">HTML</a>
-                                </li>
-                                <li class="nav-elipse-yellow"><a href="blog_list.html" title="Blog Javascript articles">Javascript</a>
-                                </li>
-                                <li class="nav-elipse-green"><a href="blog_list.html" title="Blog raphic articles">Graphic</a>
-                                </li>
-                                <li><a href="blog_post.html" title="Blog Post">Blog Post</a></li>
-                            </ul>
                         </li>
-                        <li><a href="about_me.html" title="About me">About me</a></li>
-                        <li><a href="portfolio.html" title="My projects">My projects</a></li>
-                        <li><router-link :to="{ name: 'Create'}">Create</router-link></li>
+                        <li v-if="!isLogin">
+                            <router-link :to="{ name: 'Singup'}">Singup</router-link>
+                        </li>
+                        <li v-if="!isLogin">
+                            <router-link :to="{ name: 'Login'}">Login</router-link>
+                        </li>
+                        <!-- <li><a href="about_me.html" title="About me">About me</a></li>
+                        <li><a href="portfolio.html" title="My projects">My projects</a></li> -->
+                        <li v-if="isLogin" ><router-link :to="{ name: 'Create'}">Create</router-link></li>
                     </ul>
                 </nav>
             </div>
@@ -94,7 +88,8 @@
                         </li>
                         <li><a href="about_me.html" title="About me">About me</a></li>
                         <li><a href="portfolio.html" title="My projects">My projects</a></li>
-                        <li><router-link :to="{ name: 'Create'}">Create</router-link></li>
+
+                        <li v-if="isLogin"><router-link :to="{ name: 'Create'}">Create</router-link></li>
                     </ul>
             </div>
         </div>
@@ -104,7 +99,25 @@
 </template>
 
 <script>
+import { ref } from '@vue/reactivity';
+import useLogin from '../composables/useLogin'
+import { projectAuth } from '../firebase/config';
+
 export default {
+    setup(props, context) {
+
+       const isLogin = ref(false);
+ projectAuth.onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+     isLogin.value = true
+  } else {
+      isLogin.value = false
+  }
+
+});
+return {isLogin}
+    }
 }
 </script>
 

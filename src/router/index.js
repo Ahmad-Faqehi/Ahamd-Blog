@@ -23,21 +23,21 @@ const routes = [
     name: 'Create',
     component: Create
   },
-  // {
-  //   path: '/tags/:tag',
-  //   name: 'Tag',
-  //   component: Tag
-  // },
-  // {
-  //   path: '/singup',
-  //   name: 'Singup',
-  //   component: Singup
-  // },
-  // {
-  //   path: '/login',
-  //   name: 'Login',
-  //   component: Login
-  // }
+  {
+    path: '/tags/:tag',
+    name: 'Tag',
+    component: Tag
+  },
+  {
+    path: '/singup',
+    name: 'Singup',
+    component: Singup
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  }
 ]
 
 const router = createRouter({
