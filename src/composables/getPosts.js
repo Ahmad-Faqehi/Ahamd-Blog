@@ -8,7 +8,7 @@ const getPosts = () => {
 
   const load = async () => {
     try {
-      const res = await projectFirestore.collection('posts').onSnapshot((snap) => {
+      const res = await projectFirestore.collection('posts').orderBy('createAt','desc').onSnapshot((snap) => {
         posts.value = snap.docs.map(doc => {
           return { ...doc.data(), id: doc.id}
         })
@@ -23,7 +23,6 @@ const getPosts = () => {
       error.value = err.message
     }
   }
-
   return { posts, error, load }
 }
 

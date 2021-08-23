@@ -3,11 +3,9 @@
                 <aside class="categories">
                     <h2 class="aside-title">Categories </h2>
                     <ul>
-                        <li class="nav-elipse-blue"><a href="#" title="Blog CSS articles">CSS</a></li>
-                        <li class="nav-elipse-red"><a href="#" title="Blog HTML articles">HTML</a></li>
-                        <li class="nav-elipse-yellow"><a href="#" title="Blog Javascript articles">Javascript</a></li>
-                        <li class="nav-elipse-green"><a href="#" title="Blog raphic articles">Graphic</a></li>
-                        <li><a href="#" title="Blog other articles">Other</a></li>
+                        <li v-for="cat in category" :key="cat.id" :class="nameToColor(cat.name)">
+                            <a href="#" :title="cat.name">{{cat.name}}</a>
+                        </li>
                     </ul>
                 </aside>
                 
@@ -15,10 +13,31 @@
 </template>
 
 <script>
-import useTags from '../composables/useTags'
+import getCategory from '../composables/getCategory'
 export default {
+    setup(){
 
-  props: ['posts']
+        const { category, error, load } = getCategory()
+        load()
+        return { category, error }
+    },methods:{
+
+        nameToColor(str){
+
+            if(str == "Tech"){
+                return "nav-elipse-red"
+            }else if(str == "Life"){
+                return "nav-elipse-green"
+            }else if(str == "Coffee"){
+                return "nav-elipse-yellow"
+            }else if(str == "Sport"){
+                return "nav-elipse-blue"
+            }else{
+                return "nav-elipse-un"
+            }
+        }
+    }
+    
 }
 </script>
 

@@ -20,12 +20,9 @@
                                 toolbar:'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
                                 }"/>
                            <br>
-                           <label >category</label>
-                            <select class="col-xs-12 form-control"  v-model="category">
-                              <option value="volvo" >Volvo</option>
-                              <option value="saab">Saab</option>
-                              <option value="mercedes">Mercedes</option>
-                              <option value="audi">Audi</option>
+                           <label >category </label>
+                            <select class="col-xs-12 form-control"  v-model="cat">
+                              <option v-for="cat in category" :key="cat.id" :value="cat.name" >{{cat.name}}</option>
                             </select>                            
                             <br>
                             <label >Image</label>
@@ -50,8 +47,9 @@
 <script>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { projectFirestore } from '../firebase/config'
+import { projectFirestore, timestamp } from '../firebase/config'
 import Editor from '@tinymce/tinymce-vue'
+import getCategory from '../composables/getCategory'
 export default {
    components: {
      'editor': Editor
@@ -59,7 +57,7 @@ export default {
   setup() {
     const title = ref('')
     const body = ref('')
-    const category = ref('')
+    const cat = ref('')
     const image = ref('')
     const base64img = ref('')
     const router = useRouter()
@@ -68,14 +66,17 @@ $("nav").removeClass("mobile-nav-open");
 $("body").removeClass("noscroll");
 $("#menu-animate-icon").removeClass("open");
 
+const { category, error, load } = getCategory()
+load()
 
 
     const handleSubmit = async () => {
       const post = {
         title: title.value,
         body: body.value,
-        category: category.value,
-        image: image.value
+        category: cat.value,
+        image: image.value,
+        createAt: timestamp()
       }
   
      const res = await projectFirestore.collection('posts').add(post)
@@ -94,7 +95,7 @@ $("#menu-animate-icon").removeClass("open");
 
 
       }
-    return { body, title, category, handleSubmit, uploadImage }
+    return { body, title, cat, handleSubmit, uploadImage, category }
   },
 }
 </script>
