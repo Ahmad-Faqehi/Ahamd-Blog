@@ -5,6 +5,44 @@ on:
   workflow_dispatch:
 
 jobs:
+      
+  build:
+    name: Build Project ⛏
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@master
+        
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Build dependencies
+        run: npm run build
+        
+      - name: Archive production artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: dist
+          path: dist
+          
+  deploy:
+    name: Deploy Project 🚀
+    needs: build
+    runs-on: ubuntu-latest
+    steps: 
+
+      - name: Download artifact
+        uses: actions/download-artifact@master
+        with: 
+          name: dist
+          
+      - name: Sync files to hosting
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with: 
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
 
   build_docker_image:
     name: Build Docker Image 🐬
@@ -44,42 +82,3 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/blog-vue:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-        
-
-  build:
-    name: Build Project ⛏
-    runs-on: ubuntu-latest
-    steps:
-    
-      - name: Checkout repository
-        uses: actions/checkout@master
-        
-      - name: Install dependencies
-        run: npm install
-        
-      - name: Build dependencies
-        run: npm run build
-        
-      - name: Archive production artifact
-        uses: actions/upload-artifact@master
-        with:
-          name: dist
-          path: dist
-          
-  deploy:
-    name: Deploy Project 🚀
-    needs: build
-    runs-on: ubuntu-latest
-    steps: 
-
-      - name: Download artifact
-        uses: actions/download-artifact@master
-        with: 
-          name: dist
-          
-      - name: Sync files to hosting
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        with: 
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
