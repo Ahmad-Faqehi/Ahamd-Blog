@@ -1,8 +1,3 @@
-[![LinkedIn][linkedin-shield]][linkedin-url]
-[![Twitter][twitter-shield]][twittwe-url]
-[![Twitter][github-shield]][github-url]
-
-
 # Ahmad-blog
 
 <p align="center">
@@ -41,7 +36,12 @@ npm run build
 
 Ahmad Faqehi - [@A_F775](https://twitter.com/A_F775) - alfaqehi775@hotmail.com
 
-Project Link: [https://github.com/Ahmad-Faqehi/Donor-Registration-System](https://github.com/Ahmad-Faqehi/Donor-Registration-System)
+Project Link: [https://github.com/Ahmad-Faqehi/Ahamd-Blog](https://github.com/Ahmad-Faqehi/Ahamd-Blog)
+
+[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Twitter][twitter-shield]][twittwe-url]
+[![Twitter][github-shield]][github-url]
+
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
