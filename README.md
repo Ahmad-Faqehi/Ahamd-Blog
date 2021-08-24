@@ -3,7 +3,7 @@
 <p align="center">
 
   <p align="center">
-<h2>A single web application build with Vue js</h2>
+A single web application build with Vue js
     <br />
     <a href="http://iepes.site/">View Demo</a>
   </p>
