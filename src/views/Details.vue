@@ -10,8 +10,8 @@
 
                         <!-- TEXT ARTICLE -->
                         <div class="articles-header">
-                            <time datetime="">{{ timestepToRealTime(post.createAt) }}</time>
-                            <span v-if="isNew(post.createAt)" class="articles-header-tag-green">New</span>
+                            <time datetime="">{{ timestepToRealTime(post.created_at) }}</time>
+                            <span v-if="isNew(post.created_at)" class="articles-header-tag-green">New</span>
 
                             <span class="articles-header-category"><a href="#" :class="nameToColor(post.category)" title=""> {{ post.category }}</a></span>
                         </div>
@@ -74,6 +74,7 @@ $("#menu-animate-icon").removeClass("open");
     const route = useRoute()
     
     const { error, post, load } = getPost(route.params.id)
+    console.log(post)
     load()
 
     const handleclik = async () => {
@@ -99,12 +100,18 @@ $("#menu-animate-icon").removeClass("open");
         },
         timestepToRealTime(stemp){
           
-         return format(stemp['seconds']*1000)
+        let date = new Date(stemp)
+          let day = date.getDate();
+          let month = date.getMonth();
+          let year = date.getFullYear();
+          return day+"-"+month+"-"+year;
 
         }, isNew(stemp){
-          const timeFutcher = stemp['seconds'] + (24*60*60)
-          var date = new Date();
-          const timeNow = Math.floor(date.getTime()/1000)
+           let date = new Date(stemp)
+          const timeFutcher =Math.floor(date.getTime()/1000) + (24*60*60)
+
+          var ndate = new Date();
+          const timeNow = Math.floor(ndate.getTime()/1000)
 
           if(timeFutcher > timeNow){
             return true

@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { projectFirestore } from '../firebase/config'
+import axios from 'axios'
 
 const getCategory = () => {
 
@@ -8,16 +8,13 @@ const getCategory = () => {
 
   const load = async () => {
     try {
-      const res = await projectFirestore.collection('category').onSnapshot((snap) => {
-        category.value = snap.docs.map(doc => {
-          return { ...doc.data(), id: doc.id}
-        })
-      })
-
-      
-    }
-    catch(err) {
-      error.value = err.message
+      const response = await axios.get(
+        "http://api.iepes.site/api/categories"
+      );
+      // JSON responses are automatically parsed.
+      category.value = response.data;
+    } catch (err) {
+    error.value = err.message
     }
   }
 

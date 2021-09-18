@@ -1,5 +1,6 @@
 import { ref } from 'vue'
-import { projectFirestore } from '../firebase/config'
+import axios from 'axios'
+
 
 const getPosts = () => {
 
@@ -8,19 +9,13 @@ const getPosts = () => {
 
   const load = async () => {
     try {
-      const res = await projectFirestore.collection('posts').orderBy('createAt','desc').onSnapshot((snap) => {
-        posts.value = snap.docs.map(doc => {
-          return { ...doc.data(), id: doc.id}
-        })
-      })
-
-      
-      // posts.value = res.docs.map(doc => {
-      //   return { ...doc.data(), id: doc.id}
-      // })
-    }
-    catch(err) {
-      error.value = err.message
+      const response = await axios.get(
+        "http://api.iepes.site/api/posts"
+      );
+      // JSON responses are automatically parsed.
+      posts.value = response.data;
+    } catch (err) {
+    error.value = err.message
     }
   }
   return { posts, error, load }

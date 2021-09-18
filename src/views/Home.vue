@@ -73,7 +73,6 @@ $("body").removeClass("noscroll");
 $("#menu-animate-icon").removeClass("open");
     const { posts, error, load } = getPosts()
     load()
-    
     return { posts, error }
   },
 }

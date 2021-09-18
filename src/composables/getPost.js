@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { projectFirestore } from '../firebase/config'
+import axios from 'axios'
 
 const getPost = (id) => {
 
@@ -8,15 +8,13 @@ const getPost = (id) => {
 
   const load = async () => {
     try {
-      const res = await projectFirestore.collection('posts').doc(id).get()
-
-      if(!res.exists){
-        throw Error("This post does not exist")
-      }
-      post.value = { ...res.data(), id: res.id}
-    }
-    catch(err) {
-      error.value = err.message
+      const response = await axios.get(
+        "http://api.iepes.site/api/post/"+id
+      );
+      // JSON responses are automatically parsed.
+      post.value = response.data;
+    } catch (err) {
+    error.value = err.message
     }
   }
 

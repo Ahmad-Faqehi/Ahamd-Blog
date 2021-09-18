@@ -57,6 +57,7 @@ import { projectFirestore, timestamp } from '../firebase/config'
 import Editor from '@tinymce/tinymce-vue'
 import getCategory from '../composables/getCategory'
 import Spinner from '../components/Spinner.vue'
+import axios from 'axios'
 
 export default {
    components: {
@@ -88,12 +89,23 @@ load()
         title: title.value,
         body: body.value,
         category: cat.value,
-        image: image.value,
-        createAt: timestamp()
+        image: image.value
+      //  createAt: timestamp()
       }
   
-     const res = await projectFirestore.collection('posts').add(post)
-      router.push({ name: 'Home' })
+     //const res = await projectFirestore.collection('posts').add(post)
+     try {
+      const response = await axios.post("http://api.iepes.site/api/post",post).then(function (zresponse){
+       if(zresponse.status == 200 || zresponse.status == 203 || zresponse.status == 202 || zresponse.status == 201 ){
+         router.push({ name: 'Home' })
+       }
+      })
+      // JSON responses are automatically parsed.
+     
+    } catch (err) {
+    error.value = err.message
+    }
+      
 
     }
       const uploadImage = async (e) => {
@@ -103,7 +115,7 @@ load()
         reader.readAsDataURL(ximage);
         reader.onload = e => {
         image.value = e.target.result
-        console.log(image.value)
+       // console.log(image.value)
         }
 
 

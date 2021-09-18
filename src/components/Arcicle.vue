@@ -6,8 +6,8 @@
                         <img class="articles-preview-img" :src="image" :alt="post.title"  data-rjs="2">
                         </router-link>
                         <div class="articles-header">
-                            <time datetime="2016-10-11">{{ timestepToRealTime(post.createAt) }}</time>
-                            <span v-if="isNew(post.createAt)" class="articles-header-tag">New</span>
+                            <time datetime="2016-10-11">{{ timestepToRealTime(post.created_at) }}</time>
+                            <span v-if="isNew(post.created_at)" class="articles-header-tag">New</span>
                             <span class="articles-header-category"><a href="#" title="">{{ post.category }}</a></span>
                         </div>
                         <div class="articles-content">
@@ -66,14 +66,20 @@ props: ['post'],
         },
 
         timestepToRealTime(stemp){
-
-         return format(stemp['seconds']*1000)
+          let date = new Date(stemp)
+          let day = date.getDate();
+          let month = date.getMonth();
+          let year = date.getFullYear();
+          return day+"-"+month+"-"+year;
         },
         
         isNew(stemp){
-          const timeFutcher = stemp['seconds'] + (24*60*60)
-          var date = new Date();
-          const timeNow = Math.floor(date.getTime()/1000)
+          let date = new Date(stemp)
+          const timeFutcher =Math.floor(date.getTime()/1000) + (24*60*60)
+
+          var ndate = new Date();
+          const timeNow = Math.floor(ndate.getTime()/1000)
+
           if(timeFutcher > timeNow){
             return true
           }
