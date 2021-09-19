@@ -21,7 +21,7 @@
             </div>
 
             <!-- AUTHOR -->
-            <SideBar />
+            <SideBar :posts="posts" />
             
         </div>
     </div>

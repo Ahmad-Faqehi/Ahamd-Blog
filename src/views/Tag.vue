@@ -1,32 +1,47 @@
 <template>
-  <div class="tag">
-    <div v-if="error">{{ error }}</div>
-    <div v-if="posts.length" class="layout">
-      <PostList :posts="postsWithTag" />
-      <TagCloud :posts="posts" />
+  <main>
+    <div class="container">
+        <div class="row">
+          
+            <!-- ARTICLES -->
+            <div class="col-lg-8 col-xs-12">
+                <section class="articles">
+                        
+                    <div v-for="post in posts" :key="post.id">
+                      <Arcicle :post="post" />
+                    </div>
+
+                      <div v-if="!posts.length">
+                         <Spinner />
+                      </div>
+
+                    <!-- PAGINATION -->
+                </section>
+            </div>
+
+            <!-- AUTHOR -->
+            <SideBar   />
+            
+        </div>
     </div>
-    <div v-else>
-      <Spinner />
-    </div>
-  </div>
+</main>
 </template>
 
 <script>
-import TagCloud from '../components/TagCloud.vue'
+import SideBar from '../components/SideBar.vue'
+import Arcicle from '../components/Arcicle.vue'
 import Spinner from '../components/Spinner.vue'
-import PostList from '../components/PostList.vue'
-import getPosts from '../composables/getPosts'
+import getPostsByTag from '../composables/getPostsByTag'
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
 export default {
-  components: { PostList, Spinner, TagCloud },
+  components: { Spinner, SideBar, Arcicle },
   setup() {
     const route = useRoute()
-    const { posts, error, load } = getPosts()
+    const { posts, error, load } = getPostsByTag(route.params.tag)
+    let postsWithTag = ''
     load()
-    const postsWithTag = computed(() => {
-      return posts.value.filter(p => p.tags.includes(route.params.tag))
-    })
+    
     return { error, posts, postsWithTag }
   }
 }

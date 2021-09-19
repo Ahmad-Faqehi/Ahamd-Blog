@@ -4,7 +4,7 @@
                     <h2 class="aside-title">Categories </h2>
                     <ul>
                         <li v-for="cat in category" :key="cat.id" :class="nameToColor(cat.name)">
-                            <a href="#" :title="cat.name">{{cat.name}}</a>
+                            <a :href="'/tags/'+cat.name"  :title="cat.name">{{cat.name}}</a>
                         </li>
                     </ul>
                 </aside>
@@ -14,7 +14,10 @@
 
 <script>
 import getCategory from '../composables/getCategory'
+
+
 export default {
+    props: ['posts'],
     setup(){
 
         const { category, error, load } = getCategory()
