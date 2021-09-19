@@ -13,7 +13,7 @@ A single web application build with Vue js
 
 ## Build With
 * []() Vue js 3
-* []() Firebase
+* []() MySQL
 * []() Bootstrap 4
 
 
