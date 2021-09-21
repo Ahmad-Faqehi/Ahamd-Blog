@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import axios from 'axios'
-
+import Post from '../apis/Post'
 const getCategory = () => {
 
   const category = ref([])
@@ -8,17 +8,15 @@ const getCategory = () => {
 
   const load = async () => {
     try {
-      const response = await axios.get(
-        "http://api.iepes.site/api/categories"
-      );
-      // JSON responses are automatically parsed.
+      const response = await Post.category();
+
       category.value = response.data;
     } catch (err) {
     error.value = err.message
     }
   }
-
   return { category, error, load }
+
 }
 
 export default getCategory

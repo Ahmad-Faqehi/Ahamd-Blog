@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import axios from 'axios'
-
+import Post from '../apis/Post'
 const getPost = (id) => {
 
   const post = ref(null)
@@ -8,9 +8,7 @@ const getPost = (id) => {
 
   const load = async () => {
     try {
-      const response = await axios.get(
-        "http://api.iepes.site/api/post/"+id
-      );
+      const response = await Post.post(id) ;
       // JSON responses are automatically parsed.
       post.value = response.data;
     } catch (err) {

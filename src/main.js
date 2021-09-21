@@ -16,7 +16,7 @@ import '../public/css/placeholder-loading.min.css'
 let app = createApp(App)
 
 // 2. Assign the global variable before mounting
-app.config.globalProperties.api_url = 'http://api.iepes.site/'
+app.config.globalProperties.globalVar = 'globalVar'
 
 // 3. Use router and mount app
 app.use(router).mount('#app')

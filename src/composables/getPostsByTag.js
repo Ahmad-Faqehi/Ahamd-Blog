@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import axios from 'axios'
-
+import Post from '../apis/Post'
 
 const getPostsByTag = (cat) => {
 
@@ -9,9 +9,7 @@ const getPostsByTag = (cat) => {
 
   const load = async () => {
     try {
-      const response = await axios.get(
-        "http://api.iepes.site/api/category/"+cat
-      );
+      const response = await Post.postTag(cat);
       // JSON responses are automatically parsed.
       posts.value = response.data;
     } catch (err) {

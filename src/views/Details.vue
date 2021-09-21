@@ -74,7 +74,6 @@ $("#menu-animate-icon").removeClass("open");
     const route = useRoute()
     
     const { error, post, load } = getPost(route.params.id)
-    console.log(post)
     load()
 
     const handleclik = async () => {
