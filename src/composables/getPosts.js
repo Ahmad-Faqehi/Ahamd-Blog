@@ -3,7 +3,6 @@ import axios from 'axios'
 
 
 const getPosts = () => {
-
   const posts = ref([])
   const error = ref(null)
 

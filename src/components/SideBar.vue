@@ -19,7 +19,6 @@ import getCategory from '../composables/getCategory'
 export default {
     props: ['posts'],
     setup(){
-
         const { category, error, load } = getCategory()
         load()
         return { category, error }

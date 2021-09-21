@@ -68,6 +68,8 @@ export default {
   name: 'Home',
   components: { Main },
   setup() { 
+console.log(process.env.VUE_APP_TEST)
+
 $("nav").removeClass("mobile-nav-open");
 $("body").removeClass("noscroll");
 $("#menu-animate-icon").removeClass("open");
