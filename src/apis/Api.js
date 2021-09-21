@@ -1,5 +1,9 @@
 import axios from "axios";
-console.log(process.env.AHMAD)
+
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+  })
+
 const Api = axios.create({
     baseURL: 'http://api.iepes.site/api'
 })
