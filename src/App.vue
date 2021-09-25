@@ -11,7 +11,7 @@ import Footer from './components/Footer.vue'
 export default {
   components: { Navbar, Footer },
   mounted(){
-    console.log(process.env.DB_HOST)
+    console.log(process.env.VUE_APP_AHA)
   }
   
 }
