@@ -9,11 +9,7 @@
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
 export default {
-  components: { Navbar, Footer },
-  mounted(){
-    console.log(process.env.VUE_APP_AHA)
-  }
-  
+  components: { Navbar, Footer }
 }
 </script>
 <style scoped>

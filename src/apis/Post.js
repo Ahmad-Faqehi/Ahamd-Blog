@@ -13,5 +13,7 @@ export default {
     },
     category(){
         return Api.get('categories')
+    },create(post){
+        return Api.post("post",post)
     }
 }
