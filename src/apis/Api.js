@@ -2,7 +2,7 @@ import axios from "axios";
 
 let api_url = process.env.VUE_APP_BASE_API
 if(!api_url){
-     api_url = 'http://api.iepes.site/api'
+     api_url = 'http://project.iahmad.info/Blog/api'
     }
 console.log(api_url)
 
